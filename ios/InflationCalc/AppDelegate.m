@@ -14,8 +14,8 @@
 
 #import <AppCenterReactNativeShared/AppCenterReactNativeShared.h>
 #import <AppCenterReactNative.h>
-#import <AppCenterReactNativeCrashes.h>
 #import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -54,9 +54,8 @@ static void InitializeFlipper(UIApplication *application) {
   [self.window makeKeyAndVisible];
   
   [AppCenterReactNative register];
-  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
-  
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   return YES;
 }
 
