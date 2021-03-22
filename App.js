@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -15,14 +14,31 @@ import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export default class App extends React.Component {
+  constructor() {
+    super();
+    //Crashes.generateTestCrash();
+    this.checkPreviousSession();
+  }
+  async checkPreviousSession() {
+    const didCrash = await Crashes.hasCrashedInLastSession();
+    if (didCrash) {
+      const report = await Crashes.lastSessionCrashReport();
+      // eslint-disable-next-line no-alert
+      alert('Sorry about that crash');
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button
-          title="Crash"
-          onPress={() => {
-            throw new Error('some text');
-          }}
+          title="Track Event"
+          onPress={() =>
+            Analytics.trackEvent('calculate_inflation', {
+              Internet: 'Wifi',
+              GPS: 'Off',
+            })
+          }
         />
       </View>
     );
